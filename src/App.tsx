@@ -6,10 +6,12 @@ type Repository = {
 }
 
 function App() {
-  const {data: repositories} = useFetch<Repository[]>("https://api.github.com/users/azanniel/repos");
+  const {data: repositories, isFetching} = 
+    useFetch<Repository[]>("https://api.github.com/users/azanniel/repos");
 
   return (
     <ul>
+      { isFetching && <p>Carregando...</p> }
       {repositories?.map(repo => {
         return (
           <li key={repo.full_name}>
